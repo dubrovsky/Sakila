@@ -1,0 +1,90 @@
+
+/*
+.docs-component-viewer-nav{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 25px;
+}
+
+.docs-component-viewer-nav .docs-component-viewer-nav-content {
+    margin: 25px;
+    width: 175px;
+    max-height: 75vh;
+    overflow: auto;
+}*/
+
+.docs-component-viewer-nav-content {
+    background: rgba(0,0,0,.03);
+    margin: 20px;
+    overflow: auto;
+}
+
+.docs-component-viewer-nav-content .docs-nav-content-btn:focus {
+    background: rgba(0,0,0,.08);
+}
+
+.docs-component-viewer-nav-content button {
+    padding: 10px 15px;
+    font-weight: 700;
+    line-height: 16px;
+    margin: 0;
+    /*font-size: 13px;*/
+    cursor: pointer;
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: 0 0;
+    border: none;
+}
+
+.docs-component-viewer-nav-content .docs-nav-content-btn {
+    color: rgba(0,0,0,.5);
+}
+
+.docs-component-viewer-nav-content ul {
+    list-style-type: none;
+    margin: 0 0 5px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.docs-component-viewer-nav-content li {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 15px 5px 20px;
+}
+
+.docs-component-viewer-nav-content a {
+    display: block;
+    text-decoration: none;
+}
+
+.docs-component-viewer-nav-content a {
+    color: rgba(0,0,0,.54);
+}
+
+.docs-component-viewer-nav-content button .mat-icon {
+    position: absolute;
+    right: 5px;
+    font-size: 18px;
+}
+
+.docs-component-viewer-nav-content hr {
+    padding: 0;
+    margin: 0;
+}
+
+.docs-component-viewer-nav-content hr {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.docs-component-viewer-nav-content button:focus {
+    outline: 0;
+}
+
+.docs-component-viewer-nav-content a.docs-component-viewer-sidenav-item-selected, .docs-component-viewer-nav-content a:hover {
+    color: #3f51b5;
+}

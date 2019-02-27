@@ -1,0 +1,25 @@
+table {
+    width: 100%;
+}
+
+mat-toolbar button {
+    margin-right: 8px;
+}
+
+.mat-row.selected  {
+    background: #efefef;
+}
+
+tr.mat-row:not(.selected):hover {
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+mat-form-field {
+    width: 250px;
+}
+
+/*tr.mat-row:active {
+    background: #efefef;
+}*/
+

@@ -1,0 +1,139 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Edit customer</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <input matInput placeholder="First Name" formControlName="firstName" required maxlength="45">
+                <mat-error *ngIf="customerForm.get('firstName').hasError('maxlength') && !customerForm.get('firstName').hasError('required')">
+                    Max Length is <strong>45</strong>
+                </mat-error>
+                <mat-error *ngIf="customerForm.get('firstName').hasError('required')">
+                    First Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lastName" required maxlength="45">
+                <mat-error *ngIf="customerForm.get('lastName').hasError('maxlength') && !customerForm.get('lastName').hasError('required')">
+                    Max Length is <strong>45</strong>
+                </mat-error>
+                <mat-error *ngIf="customerForm.get('lastName').hasError('required')">
+                    Last Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Email" type="email" formControlName="email">
+                <mat-error *ngIf="customerForm.get('email').hasError('email')">
+                    Please enter a valid email address
+                </mat-error>
+            </mat-form-field>
+
+            <mat-checkbox labelPosition="before" formControlName="active">Active</mat-checkbox>
+
+            <mat-form-field formGroupName="store">
+                <mat-select placeholder="Store" formControlName="storeId" required>
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let storeOption of stores" [value]="storeOption.storeId">
+                        {{storeOption.storeId}}
+                    </mat-option>
+                    <!--<mat-option *ngFor="let storeOption of stores" [value]="storeOption.storeId === customerForm.get('store').value.storeId ? customerForm.get('store').value : storeOption">
+                        {{storeOption.storeId}}
+                    </mat-option>-->
+                </mat-select>
+                <mat-error *ngIf="customerForm.get('store').hasError('required')">
+                    Store is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <div formGroupName="address">
+                <mat-card-header>
+                    <mat-card-title>Address</mat-card-title>
+                </mat-card-header>
+
+                <mat-form-field>
+                    <input matInput placeholder="The first line of an address" formControlName="address" required maxlength="50">
+                    <mat-error *ngIf="customerForm.get('address.address').hasError('maxlength') && !customerForm.get('address.address').hasError('required')">
+                        Max Length is <strong>50</strong>
+                    </mat-error>
+                    <mat-error *ngIf="customerForm.get('address.address').hasError('required')">
+                        Address is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="An optional second line of an address" formControlName="address2" maxlength="50">
+                    <mat-error *ngIf="customerForm.get('address.address2').hasError('maxlength')">
+                        Max Length is <strong>50</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="The region of an address" formControlName="district" required maxlength="20">
+                    <mat-error *ngIf="customerForm.get('address.district').hasError('maxlength') && !customerForm.get('address.district').hasError('required')">
+                        Max Length is <strong>20</strong>
+                    </mat-error>
+                    <mat-error *ngIf="customerForm.get('address.district').hasError('required')">
+                        District is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <ng-container formGroupName="city">
+                    <mat-form-field>
+                        <mat-select placeholder="City" formControlName="cityId" (selectionChange)="onCitySelectionChange()" required>
+                            <mat-option></mat-option>
+                            <!--<mat-option *ngFor="let cityOption of filteredCities" [value]="cityOption.cityId === customerForm.get('address.city').value.cityId ? customerForm.get('address.city').value : cityOption">
+                                {{cityOption.city}}
+                            </mat-option>-->
+                            <mat-option *ngFor="let cityOption of filteredCities" [value]="cityOption.cityId">
+                                {{cityOption.city}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="customerForm.get('address.city').hasError('required')">
+                            City is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field formGroupName="country">
+                        <mat-select placeholder="Country" formControlName="countryId" (selectionChange)="onCountrySelectionChange()" required>
+                            <mat-option></mat-option>
+                            <!--<mat-option *ngFor="let countryOption of filteredCountries" [value]="countryOption.countryId === customerForm.get('address.city.country').value.countryId ? customerForm.get('address.city.country').value : countryOption">
+                                {{countryOption.country}}
+                            </mat-option>-->
+                            <mat-option *ngFor="let countryOption of filteredCountries" [value]="countryOption.countryId">
+                                {{countryOption.country}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="customerForm.get('address.city.country').hasError('required')">
+                            Country is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </ng-container>
+
+                <mat-form-field>
+                    <input matInput placeholder="The postal code or ZIP code" formControlName="postalCode" maxlength="10">
+                    <mat-error *ngIf="customerForm.get('address.postalCode').hasError('maxlength')">
+                        Max Length is <strong>10</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="The telephone number" type="tel" formControlName="phone" required maxlength="20">
+                    <mat-error *ngIf="customerForm.get('address.phone').hasError('maxlength') && !customerForm.get('address.phone').hasError('required')">
+                        Max Length is <strong>20</strong>
+                    </mat-error>
+                    <mat-error *ngIf="customerForm.get('address.phone').hasError('required')">
+                        The telephone number is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="customerForm.invalid" (click)="onSubmit()">Submit</button>
+        <button mat-raised-button color="warn" (click)="previousState()">Cancel</button>
+    </mat-card-actions>
+</mat-card>

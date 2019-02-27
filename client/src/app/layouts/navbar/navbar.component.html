@@ -1,0 +1,33 @@
+<!--<mat-card>-->
+    <div class="docs-component-viewer-nav-content mat-elevation-z8">
+        <nav *ngFor="let category of appConfig.navbarItems; let last = last;">
+            <ng-container *ngIf="category.items.length > 0">
+                <button cdkAccordionItem #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true"
+                        class="docs-nav-content-btn"
+                        [attr.aria-label]="category.name + ', section toggle'"
+                        [attr.aria-controls]="'panel-' + category.id"
+                        [attr.aria-expanded]="panel.expanded"
+                >
+                    {{category.name}}
+                    <mat-icon>{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
+                </button>
+                <ul [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'" id="panel-{{category.id}}">
+                    <li *ngFor="let item of category.items">
+                        <a [routerLink]="'/' + item.id" routerLinkActive="docs-component-viewer-sidenav-item-selected">
+                            {{item.name}}
+                        </a>
+                    </li>
+                </ul>
+            </ng-container>
+            <ng-container *ngIf="category.items.length == 0">
+                <button class="docs-nav-content-btn">
+                    <a [routerLink]="'/' + category.id" routerLinkActive="docs-component-viewer-sidenav-item-selected">
+                        {{category.name}}
+                    </a>
+                </button>
+            </ng-container>
+
+            <hr *ngIf="!last"/>
+        </nav>
+    </div>
+<!--</mat-card>-->
