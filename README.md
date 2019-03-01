@@ -12,6 +12,7 @@ Backend:
 - REST
 - JSON 
 - MySQL
+- Ehcache 
 - Tomcat
 - Maven
 
